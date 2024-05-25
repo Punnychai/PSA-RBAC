@@ -9,10 +9,12 @@
     <body>
         <div class="signup-container">
             <h2>Sign Up</h2>
-            <form id="signupForm" method="post" action="signup.php">
+            <form id="signupForm" action="" method="post">
                 <div>
                     <label for="email"><h6>Email :</h6></label>
                     <input type="text" id="email" name="email" required>
+                    <label for ="fullname"><h6>Full Name :</h6></label>
+                    <input type="text" id="fullname" name="fullname" required>
                     <label for="username"><h6>Username :</h6></label>
                     <input type="text" id="username" name="username" required>
                 </div>
@@ -26,7 +28,7 @@
                 <div>
                     <p>Password Strength : <span id="passwordFeedback"></span></p>
                 </div>
-                <button type="submit">Sign Up</button>
+                <input type="submit" name="SignUp" value="Sign Up">
             </form>
             <p id="message"></p>
         </div>
@@ -34,6 +36,7 @@
         <?php
             include 'PasswordAnalyser.php';
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $email = $_POST['email'];
                 $username = $_POST['username'];
                 $password = $_POST['password'];
                 
@@ -44,14 +47,41 @@
                     echo "<p>Feedback: $missList</p>";
                 }
                 
-                if ($feedback === 'Very Strong' || $feedback === 'Strong') {
-                    // Call your createUser function from user_management.php to create the user
-                    // createUser($username, $password);
+                // if ($feedback === 'Very Strong' || $feedback === 'Strong') {
+                    session_start();
+                    if (isset($_POST['SignUp'])) {
+                        include 'connect.php';
+                        
+                        // Store user data in $_SESSION
+                        $_SESSION['email'] = $_POST['email'];
+                        $_SESSION['fullname'] = $_POST['fullname'];
+                        $_SESSION['username'] = $_POST['username'];
+                        $_SESSION['password'] = $_POST['password'];
+                        $_SESSION['signup'] = true;
+
+                        if(isset($_SESSION['signup'])){
+                            unset($_SESSION['signup']);
+                            $email = $_SESSION['email'];
+                            $fullname = $_SESSION['fullname'];
+                            $username = $_SESSION['username'];
+                            $pwd = $_SESSION['password'];
+                            $hashedPwd = password_hash($pwd, PASSWORD_BCRYPT);
+                        
+                            $sql = "INSERT INTO employees (email, fullname, username, pwd) VALUES (?, ?, ?, ?)";
+                            $stmt = $mysqli->prepare($sql);
+                            $stmt->bind_param("ssss", $email, $fullname, $username, $hashedPwd);
+                            $stmt->execute();
+                            $stmt->close();
+                        }
+                    }
+                    $mysqli->close();
+                    session_destroy();
+                    header('location: Landing.php');
                     echo "<p>Account created successfully.</p>";
                 } else {
                     echo "<p>Password is not strong enough. Please improve your password.</p>";
                 }
-            }
+            // } this is for password condition
         ?>
 
         <script>
