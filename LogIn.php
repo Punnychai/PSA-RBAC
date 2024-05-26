@@ -27,7 +27,51 @@
         </div>
         
         <?php
-        
+        session_start();        // test     8;pritg0hkFv
+            if (isset($_POST['LogIn'])) {
+                include 'connect.php';
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+
+                $query = "SELECT employee_id, username, pwd, department_id, role_id FROM employees WHERE username = ?";
+                $stmt = $mysqli->prepare($query);
+
+                if ($stmt) {
+                    $stmt->bind_param("s", $username);
+                    $stmt->execute();
+                    $stmt->store_result();
+
+                    if ($stmt->num_rows > 0) {
+                    //username true
+                        $stmt->bind_result($employee_id, $db_usn, $db_pwd, $department_id, $role_id);
+                        $stmt->fetch();
+
+                        if(password_verify($password, $db_pwd)) {
+                        // password true
+                            $_SESSION['employee_id'] = $employee_id;
+                            $query = "SELECT role_ID FROM employees WHERE employee_id = ?";
+
+                            $stmt = $mysqli->prepare($query);
+                            $stmt->bind_param("i", $employee_id);
+                            $stmt->execute();
+                            $stmt->bind_result($employee_role);
+
+                            if ($stmt->fetch()) {
+                            // fetch true
+                                if ($employee_role == 5) {
+                                // admin
+                                    $_SESSION['username'] = $username;
+                                    $_SESSION['$employee_role'] = "Admin";
+                                    header('Location: RoleBased/Admin.php');
+                                }
+
+                                // other roles here
+                                
+                            }
+                        }
+                    }
+                }
+            }
         ?>
 
         <script>

@@ -63,7 +63,8 @@
                             $username = $_SESSION['username'];
                             $pwd = $_SESSION['password'];
                             $hashedPwd = password_hash($pwd, PASSWORD_BCRYPT);
-                        
+                            
+                            // Prepared Statement & Parameter Binding (Prevent Injection)
                             $sql = "INSERT INTO employees (email, fullname, username, pwd) VALUES (?, ?, ?, ?)";
                             $stmt = $mysqli->prepare($sql);
                             $stmt->bind_param("ssss", $email, $fullname, $username, $hashedPwd);
