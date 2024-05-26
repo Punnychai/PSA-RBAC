@@ -30,20 +30,20 @@ body {
 }
 
 .signup-container h6 {
-    font-size: 18px;
-    font-weight: 500;
-    margin: 4px 0 10px 0;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 4px 0 10px 0;
 }
   
 #email, #fullname, #username, #password {
-    height: 17px;
-    padding: 10px;
-    margin-bottom: 8px;
-    border: none;
-    border-radius: 6px;
-    background-color: #333;
-    color: #fff;
-    width: 95%;
+  height: 17px;
+  padding: 10px;
+  margin-bottom: 8px;
+  border: none;
+  border-radius: 6px;
+  background-color: #333;
+  color: #fff;
+  width: 95%;
 }
 
 #passwordStrength, #passwordMissing {
@@ -53,13 +53,12 @@ body {
 
 
 .signup-container select {
-    
-    padding: 10px;
-    border: 1px solid #444;
-    border-radius: 6px;
-    background-color: #333;
-    color: #fff;
-    width: 100%;
+  padding: 10px;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background-color: #333;
+  color: #fff;
+  width: 100%;
 }
 
 #passwordVis {
@@ -85,21 +84,11 @@ input[type="submit"] {
   cursor: pointer;
 }
   
-#SUBMIT:hover {
-background-color: darkgreen;
+input[type="submit"]:hover {
+  background-color: darkgreen;
 }
-  
 
 .signup-container p {
   margin-top: 16px;
-}
-
-/* Password strength indicator */
-.signup-container p {
   font-size: 14px;
-}
-
-.signup-container p::after {
-  content: attr(data-strength);
-  color: #FFD700; /* Color based on password strength */
 }
