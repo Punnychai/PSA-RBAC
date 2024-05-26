@@ -29,16 +29,16 @@ body {
   flex-direction: column;
 }
 
-h6 {
+.signup-container h6 {
     font-size: 18px;
     font-weight: 500;
     margin: 4px 0 10px 0;
 }
   
-.userName, .password {
+#email, #fullname, #username, #password {
     height: 17px;
     padding: 10px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     border: none;
     border-radius: 6px;
     background-color: #333;
@@ -46,17 +46,9 @@ h6 {
     width: 95%;
 }
 
-.password {
-  border-radius: 6px 0 0 6px;
-}
-
-.eyeIcon {
-  position: absolute;
-  top: 288px;
-  left: 683px;
-  transform: translateX(5px);
-  width: 20px;
-  height: auto;
+#passwordStrength, #passwordMissing {
+  min-height: 20px;
+  margin: 4px 0 8px 0;
 }
 
 
@@ -70,7 +62,7 @@ h6 {
     width: 100%;
 }
 
-#SHOWPWD {
+#passwordVis {
   width: 10%;
   height: 37px;
   border: none;
@@ -78,11 +70,11 @@ h6 {
 
 }
 
-#SHOWPWD:hover {
+#passwordVis:hover {
   background-color: lightskyblue;
 }
 
-#SUBMIT {
+input[type="submit"] {
   background-color: green;
   color: white;
   font-size: 16px;

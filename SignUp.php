@@ -22,32 +22,29 @@
                     <label for="password"><h6>Password :</h6></label>
                     <div style="display: flex;">
                         <input type="password" id="password" name="password" required>
-                        <button type="button" onclick="togglePasswordVisibility()">Show</button>
+                        <button type="button" id="passwordVis" onclick="togglePasswordVisibility()">S/H</button>
                     </div>
                 </div>
                 <div>
-                    <p>Password Strength : <span id="passwordFeedback"></span></p>
+                    <p id="passwordStrength"></p>
+                    <p id="passwordMissing"></p>
                 </div>
                 <input type="submit" name="SignUp" value="Sign Up">
             </form>
-            <p id="message"></p>
         </div>
         
         <?php
-            include 'PasswordAnalyser.php';
+            include 'PasswordAnalyser.php';     // SERVER SIDE CONDITION
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $email = $_POST['email'];
-                $username = $_POST['username'];
-                $password = $_POST['password'];
                 
-                list($feedback, $missList) = passwordAnalyser($password);
+                list($feedback, $missList) = passwordAnalyser($_POST['password']);
                 
                 echo "<p>Password Strength: $feedback</p>";
                 if ($missList) {
                     echo "<p>Feedback: $missList</p>";
                 }
                 
-                // if ($feedback === 'Very Strong' || $feedback === 'Strong') {
+                if ($feedback === 'Very Strong' || $feedback === 'Strong') {
                     session_start();
                     if (isset($_POST['SignUp'])) {
                         include 'connect.php';
@@ -76,14 +73,14 @@
                     }
                     $mysqli->close();
                     session_destroy();
-                    header('location: Landing.php');
-                    echo "<p>Account created successfully.</p>";
+                    header('location: Home.php');
                 } else {
                     echo "<p>Password is not strong enough. Please improve your password.</p>";
                 }
-            // } this is for password condition
+            }
         ?>
 
+        <script src="PasswordAnalyser.js"></script>     <!-- CLIENT SIDE FEEDBACK -->
         <script>
             function togglePasswordVisibility() {
                 const passwordField = document.getElementById('password');
@@ -94,7 +91,8 @@
             document.getElementById('password').addEventListener('input', function() {
                 const password = this.value;
                 const feedback = passwordAnalyser(password);
-                document.getElementById('passwordFeedback').textContent = feedback.join('');
+                document.getElementById('passwordStrength').textContent = feedback[0];
+                document.getElementById('passwordMissing').textContent = feedback[1];
             });
         </script>
     </body>
