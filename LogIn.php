@@ -27,7 +27,7 @@
         </div>
         
         <?php
-        session_start();        // test     8;pritg0hkFv
+        session_start();        // admin   9h,-jkwdj.ljsPhk
             if (isset($_POST['LogIn'])) {
                 include 'connect.php';
                 $username = $_POST['username'];
@@ -63,23 +63,23 @@
                                 switch ($employee_role) {
                                     case 5:
                                         $_SESSION['$employee_role'] = "Admin";
-                                        header('Location: RoleBased/Admin.php');
+                                        header('Location: Roles/Admin.php');
                                         break;
                                     case 4:
                                         $_SESSION['$employee_role'] = "Director";
-                                        header('Location: RoleBased/Director.php');
+                                        header('Location: Roles/Director.php');
                                         break;
                                     case 3:
                                         $_SESSION['$employee_role'] = "Manager";
-                                        header('Location: RoleBased/Manager.php');
+                                        header('Location: Roles/Manager.php');
                                         break;
                                     case 2:
                                         $_SESSION['$employee_role'] = "Staff";
-                                        header('Location: RoleBased/Staff.php');
+                                        header('Location: Roles/Staff.php');
                                         break;
                                     case 1:
                                         $_SESSION['$employee_role'] = "Intern";
-                                        header('Location: RoleBased/Intern.php');
+                                        header('Location: Roles/Intern.php');
                                         break;
                                     default:
                                         // Handle unexpected role values if necessary
