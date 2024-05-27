@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    if ($_SESSION['$employee_role'] != "Admin") {
+    if ($_SESSION['$employee_role'] != "Admin") {   // admin   9h,-jkwdj.ljsPhk (ต้มข่าไก่ใส่หญ้า)
         header('Location: ../LogIn.php');
         exit();
     }
@@ -16,6 +16,14 @@
         <link rel="stylesheet" href="Roles.css" />
     </head>
     <body>
-
+        <a href="../Manage/UserManage.php" class="manage">
+            <label>Users Management</label>
+        </a>
+        <a href="../Manage/NewsManage.php" class="manage">
+            <label>News Management</label>
+        </a>
+        <a href="../Manage/DocsManage.php" class="manage">
+            <label>Documents Management</label>
+        </a>
     </body>
 </html>

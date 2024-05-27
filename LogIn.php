@@ -27,7 +27,7 @@
         </div>
         
         <?php
-        session_start();        // admin   9h,-jkwdj.ljsPhk
+        session_start();
             if (isset($_POST['LogIn'])) {
                 include 'connect.php';
                 $username = $_POST['username'];
