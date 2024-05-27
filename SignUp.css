@@ -46,6 +46,10 @@ body {
   width: 95%;
 }
 
+#password {
+  border-radius: 6px 0 0 6px;
+}
+
 #passwordStrength, #passwordMissing {
   min-height: 20px;
   margin: 4px 0 8px 0;
@@ -70,7 +74,7 @@ body {
 }
 
 #passwordVis:hover {
-  background-color: lightskyblue;
+  background-color: #AAA;
 }
 
 input[type="submit"] {

@@ -58,15 +58,33 @@
 
                             if ($stmt->fetch()) {
                             // fetch true
-                                if ($employee_role == 5) {
-                                // admin
-                                    $_SESSION['username'] = $username;
-                                    $_SESSION['$employee_role'] = "Admin";
-                                    header('Location: RoleBased/Admin.php');
-                                }
+                                $_SESSION['username'] = $username;
 
-                                // other roles here
-                                
+                                switch ($employee_role) {
+                                    case 5:
+                                        $_SESSION['$employee_role'] = "Admin";
+                                        header('Location: RoleBased/Admin.php');
+                                        break;
+                                    case 4:
+                                        $_SESSION['$employee_role'] = "Director";
+                                        header('Location: RoleBased/Director.php');
+                                        break;
+                                    case 3:
+                                        $_SESSION['$employee_role'] = "Manager";
+                                        header('Location: RoleBased/Manager.php');
+                                        break;
+                                    case 2:
+                                        $_SESSION['$employee_role'] = "Staff";
+                                        header('Location: RoleBased/Staff.php');
+                                        break;
+                                    case 1:
+                                        $_SESSION['$employee_role'] = "Intern";
+                                        header('Location: RoleBased/Intern.php');
+                                        break;
+                                    default:
+                                        // Handle unexpected role values if necessary
+                                        break;
+                                }
                             }
                         }
                     }

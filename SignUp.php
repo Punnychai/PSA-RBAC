@@ -74,7 +74,7 @@
                     }
                     $mysqli->close();
                     session_destroy();
-                    header('location: Home.php');
+                    header('location: Pages/Home.php');
                 } else {
                     echo "<p>Password is not strong enough. Please improve your password.</p>";
                 }

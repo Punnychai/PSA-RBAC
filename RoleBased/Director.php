@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-if ($_SESSION['$employee_role'] != "Admin") {
+if ($_SESSION['$employee_role'] != "Director") {
     header('Location: ../LogIn.php');
     exit();
 }
 else {
-    echo "This is the admin page";
+    echo "This is the director page";
 }
 ?>
