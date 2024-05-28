@@ -14,16 +14,13 @@ DOCUMENTS :
         EDIT   : Admin, Director, Manager
 
     3   VIEW : Admin, Director, Manager, Staff (same department as document)
-        EDIT   : Admin, Director, Manager
+        EDIT   : Admin, Director, Manager (same department as document)
 
     2   VIEW : Admin, Director, Manager, Staff
         EDIT   : Admin, Director, Manager
 
     1   VIEW : Admin, Director, Manager, Staff, Intern
         EDIT   : Admin, Director, Manager
-    
-    0   VIEW : public
-        EDIT   : Admin, Director
 
 If someone try to access classified document without signing in, they'll be yeeted to login page
 
@@ -38,40 +35,8 @@ TO-DO List
 - Include Time to crack password in SignUp page
 - Include access log (username, date, time, IP address)
 
-- DocsView, DocsManage, DocsAdd
+- DocsManage, DocsAdd
 - NewsView, NewsManage, NewsAdd
 - UserManage, UserAdd
 
 - Restyle the whole thing
-
-DOCUMENT VIEW
-
-    if (document.confidentiality == 5) {        // level 5 document
-        if ((employee.role_id == 5) || (employee.role_id == 4)) {
-            allow access // admin and director
-        }
-    }
-
-    if (document.confidentiality == 4) {        // level 4 document
-        if ((employee.role_id == 5) || (employee.role_id == 4) || (employee.role_id == 3)) {
-            allow access // admin, director, and all managers
-        }
-    }
-
-    if (document.confidentiality == 3) {        // level 3 document
-        if ((employee.role_id == 5) || (employee.role_id == 4) || (employee.role_id == 3)) {
-            allow access // admin, director, and all managers
-        }
-        else if (employee.role_id == 2) {
-            if (document.department_id == employee.department_id) {
-                allow access // staffs can see documents in their own department
-            }
-        }
-    }
-    
-    if ((document.confidentiality == 2) || (document.confidentiality == 1)) {
-        // for level 2 and level 1 document; if user's role number is higher than document's confidentiality
-        if (employee.role_id >= document.confidentiality) {
-            allow access
-        }
-    }

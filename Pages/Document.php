@@ -42,8 +42,32 @@
             <table>
                 <?php
                     include '../connect.php';
+                    
+                    if ($_SESSION['$employee_role'] == 'Admin' || $_SESSION['$employee_role'] == 'Director') {
+                    // view everything
+                        $doc = "SELECT document_name, department_id, confidentiality FROM documents";
+                    }
+                    else if ($_SESSION['$employee_role'] == 'Manager') {
+                    // view everything up to level 4
+                        $doc = "SELECT document_name, department_id, confidentiality FROM documents WHERE documents.confidentiality < 5";
+                    }
+                    else if ($_SESSION['$employee_role'] == 'Staff') {
+                    // view everything in level 1,2 and level 3 in same department
+                        $doc = "SELECT d.document_id, d.document_name, d.department_id, d.confidentiality 
+                                FROM employees e
+                                JOIN documents d ON e.department_id = d.department_id AND e.role_id = 2 AND d.confidentiality <= 3
+                                WHERE e.role_id = 2 AND e.employee_id = " . $_SESSION['employee_id'] .
+                                " UNION
+                                SELECT d.document_id, d.document_name, d.department_id, d.confidentiality 
+                                FROM employees e
+                                JOIN documents d ON e.role_id = 2 AND d.confidentiality <= 2
+                                WHERE e.role_id = 2 AND e.department_id != d.department_id AND e.employee_id =" . $_SESSION['employee_id'];
+                    }
+                    else if ($_SESSION['$employee_role'] == 'Intern') {
+                    // view level 1
+                        $doc = "SELECT document_name, department_id, confidentiality FROM documents WHERE documents.confidentiality = 1";
+                    }
 
-                    $doc = "SELECT document_name, department_id, confidentiality FROM documents";
                     $result = $mysqli->query($doc);
 
                     if ($result) {

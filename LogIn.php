@@ -49,7 +49,8 @@
                         if(password_verify($password, $db_pwd)) {
                         // password true
                             $_SESSION['employee_id'] = $employee_id;
-                            $query = "SELECT role_ID FROM employees WHERE employee_id = ?";
+                            $_SESSION['username'] = $db_usn;
+                            $query = "SELECT role_id FROM employees WHERE employee_id = ?";
 
                             $stmt = $mysqli->prepare($query);
                             $stmt->bind_param("i", $employee_id);
@@ -58,8 +59,6 @@
 
                             if ($stmt->fetch()) {
                             // fetch true
-                                $_SESSION['username'] = $username;
-
                                 switch ($employee_role) {
                                     case 5:
                                         $_SESSION['$employee_role'] = "Admin";
