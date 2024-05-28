@@ -6,6 +6,7 @@ body {
     padding: 0;
 }
 
+/* Home.php */
 nav {
     background-color: #005398;
     color: #fff;
@@ -44,7 +45,6 @@ nav ul li a {
     background-color: white;
     border: 2px solid black;
     border-radius: 6px;
-    /* min-width: 120px; */
     z-index: 1;
 }
 .dropdown-content a {
@@ -58,4 +58,41 @@ nav ul li a {
 
 .dropdown-content a:hover {
     background-color: lightsteelblue;
+}
+
+/* Document.php */
+.book-panel {
+    width: 60%;
+    margin: 40px 40px 40px 400px;;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th {
+    height: 60px;
+    font-size: 32px;
+    font-weight: 600;
+}
+tr {
+    height: 60px;
+    text-align: center;
+}
+tr th, tr td {
+    width: 33%;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+tr:hover {
+    background-color: lightblue;
+}
+
+.no-hover:hover {
+    background-color: white;
 }
