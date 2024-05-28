@@ -5,6 +5,7 @@
         height: 85px;
         font-size: 24px;
         font-weight: 500;">
+
     <?php
         include '../connect.php';
         session_start();
@@ -26,7 +27,7 @@
 
             if ($username) {
                 // If the user's name is retrieved, display the welcome message
-                echo "<h2 style='position: absolute; top: 22px; left: 100px;'>Welcome, " . $fullName . "!</p><br>";
+                echo "<h2 style='position: absolute; top: 22px; left: 100px;'>Welcome, " . "<span style='color: lightgreen'>$fullName</span>" . "!</h2><br>";
 
             } else {
                 // If the query returns an empty result set, display a default welcome message

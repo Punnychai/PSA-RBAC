@@ -1,8 +1,8 @@
 <?php
     session_start();
 
-    if (!isset($_SESSION['$employee_role'])) {
-        header('Location: ../LogIn.php');
+    if ($_SESSION['$employee_role'] != 'Admin' && $_SESSION['$employee_role'] != 'Director' && $_SESSION['$employee_role'] != 'Manager') {
+        header('Location: ../LogIn.php');      // this page can only be viewed by Admin, Director, and Manager
         exit();
     }
 ?>
@@ -12,7 +12,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>MANAGE Documents</title>
+        <title>Document</title>
         <link rel="stylesheet" href="Manage.css" />
     </head>
     <body>
@@ -30,7 +30,7 @@
             ?>
         </div>
         <div class="book-panel">
-            <table>
+            <table> 
                 <tr class="no-hover">
                     <th>Document</th> 
                     <th>Origin Department</th>
