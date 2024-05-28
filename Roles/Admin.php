@@ -15,15 +15,18 @@
         <title>Admin</title>
         <link rel="stylesheet" href="Roles.css" />
     </head>
-    <body>
-        <a href="../Manage/UserManage.php" class="manage">
-            <label>Users Management</label>
-        </a>
-        <a href="../Manage/NewsManage.php" class="manage">
-            <label>News Management</label>
-        </a>
-        <a href="../Manage/DocsManage.php" class="manage">
-            <label>Documents Management</label>
-        </a>
+    <body>  
+        <?php include '../Pages/HeadBar.php'; ?>
+        <div class="main">
+            <a href="../Manage/UserManage.php" class="manage">
+                <label>Users Management</label>
+            </a>
+            <a href="../Manage/NewsManage.php" class="manage">
+                <label>News Management</label>
+            </a>
+            <a href="../Manage/DocsManage.php" class="manage">
+                <label>Documents Management</label>
+            </a>
+        </div>
     </body>
 </html>

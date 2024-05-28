@@ -16,11 +16,14 @@
         <link rel="stylesheet" href="Roles.css" />
     </head>
     <body>
-        <a href="../Pages/News.php" class="manage">
-            <br /><label>News</label>
-        </a>
-        <a href="../Pages/Document.php" class="manage">
-            <br /><label>Documents</label>
-        </a>
+        <?php include '../Pages/HeadBar.php'; ?>
+        <div class="main">
+            <a href="../Pages/News.php" class="manage">
+                <br /><label>News</label>
+            </a>
+            <a href="../Pages/Document.php" class="manage">
+                <br /><label>Documents</label>
+            </a>
+        </div>
     </body>
 </html>

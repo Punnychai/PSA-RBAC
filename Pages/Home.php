@@ -11,7 +11,7 @@
             <ul>
                 <li style="margin-left: 100px;"><a href="Home.php">Home</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle">News <span style="font-size: 16px;">▼</span></a>
+                    <a href="#" class="dropdown-toggle">News ▼</a>
                     <div class="dropdown-content">
                         <a href="#">International Situations</a>
                         <a href="#">Public Announcements</a>
@@ -19,7 +19,7 @@
                     </div>
                 </li>
                 <li><a href="Document.php">Documents</a></li> <!-- use RBAC to navigate -->
-                <li style="margin-left: 1100px;"><a href="../LogIn.php">Log In</a></li>
+                <li style="margin-left: 1000px;"><a href="../LogIn.php">Log In</a></li>
                 <li><a href="About.php">About</a></li>
             </ul>
         </nav>
@@ -57,7 +57,15 @@
                 });
             });
         </script>
-        <img src="../Images/ElGato.jpg" alt="Logo" style="width: 70px; height: 70px; border-radius: 50%; position: absolute; top: 6px; left: 36px;">
+        <img src="../Images/ElGato.jpg" alt="Logo" style="width: 70px; height: 70px; border-radius: 50%; position: absolute; top: 37px; left:50px;">
+    
+        <div>
+            <!-- related contents -->
+        </div>
+
+        <div>
+            <!-- another related contents -->
+        </div>
     </body>
 </html>
 
