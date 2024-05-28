@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    if ($_SESSION['$employee_role'] != "Staff") {   // staff   9h,-jkwdj.ljsPhk (ต้มข่าไก่ใส่หญ้า)
+    if ($_SESSION['$employee_role'] != "Staff") {
         header('Location: ../LogIn.php');
         exit();
     }

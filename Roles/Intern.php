@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    if ($_SESSION['$employee_role'] != "Manager") {
+    if ($_SESSION['$employee_role'] != "Intern") {
         header('Location: ../LogIn.php');
         exit();
     }
@@ -12,7 +12,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Manager</title>
+        <title>Intern</title>
         <link rel="stylesheet" href="Roles.css" />
     </head>
     <body>
@@ -23,9 +23,6 @@
             </a>
             <a href="../Pages/Document.php" class="manage">
                 <br /><label>Documents</label>
-            </a>
-            <a href="../Manage/DocsManage.php" class="manage">
-                <label>Documents Management</label>
             </a>
         </div>
     </body>

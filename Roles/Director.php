@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    if ($_SESSION['$employee_role'] != "Director") {   // director   9h,-jkwdj.ljsPhk (ต้มข่าไก่ใส่หญ้า)
+    if ($_SESSION['$employee_role'] != "Director") {
         header('Location: ../LogIn.php');
         exit();
     }
@@ -23,6 +23,9 @@
             </a>
             <a href="../Pages/Document.php" class="manage">
                 <br /><label>Documents</label>
+            </a>
+            <a href="../Manage/DocsManage.php" class="manage">
+                <label>Documents Management</label>
             </a>
         </div>
     </body>
