@@ -1,8 +1,8 @@
 <?php
     session_start();
 
-    if ($_SESSION['$employee_role'] != 'Admin' && $_SESSION['$employee_role'] != 'Director' && $_SESSION['$employee_role'] != 'Manager') {
-        header('Location: ../LogIn.php');      // this page can only be viewed by Admin, Director, and Manager
+    if ($_SESSION['$employee_role'] != 'Admin' && $_SESSION['$employee_role'] != 'Manager') {
+        header('Location: ../LogIn.php');      // this page can only be viewed by Admin and Manager
         exit();
     }
 ?>
@@ -18,6 +18,17 @@
             .book-panel {
                 width: 90%;
                 margin-left: 100px;
+            }
+            td {
+                font-size: 20px;
+                font-weight: 400px;
+                margin: 0;
+                padding: 0;
+            }
+            td a {
+                font-family: 'Inter';
+                text-decoration: none;
+                font-weight: 600;
             }
             tr th, tr td {
                 width:25%;
@@ -44,27 +55,33 @@
                 <?php
                     include '../connect.php';
 
-                    $doc = "SELECT document_name, department_id, confidentiality FROM documents";
+                    $doc = "SELECT document_id, document_name, department_id, confidentiality FROM documents";
                     $result = $mysqli->query($doc);
 
                     if ($result) {
                         echo "<table>";
 
                         while ($row = $result->fetch_array()) {
+                            $dID = $row["document_id"];
                             echo "<tr>";
-                            echo "<td>".$row["document_name"]."</td>";
-                            echo "<td>".$row["department_id"]."</td>";
-                            echo "<td>".$row["confidentiality"]."</td>";
-                            echo "<td>manage</td>";     // placeholder
+                            echo "<td>" . htmlspecialchars($row["document_name"]) . "</td>";
+                            echo "<td>" . htmlspecialchars($row["department_id"]) . "</td>";
+                            echo "<td>" . htmlspecialchars($row["confidentiality"]) . "</td>";
+                            echo "<td>
+                                    <a href='DocsEdit.php?dID=$dID' style='color: #028A0F;'>
+                                        <p>Edit</p>
+                                    </a>
+                                    <a href='DocsRemove.php?dID=$dID' style='color: #D71609;'>
+                                        <p>Remove</p>
+                                    </a>
+                                </td>";
                             echo "</tr>";
                         }
 
                         echo "</table>";
                     } else {
-                        echo "Error: ".$mysqli->error;
+                        echo "Error: " . $mysqli->error;
                     }
-
-                    $mysqli->close();
                 ?>
             </table>
         </div>
