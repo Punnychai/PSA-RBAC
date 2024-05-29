@@ -31,7 +31,7 @@
                 $mainMenu = '<a href="../Roles/Staff.php" style="color: lightgreen;">' . htmlspecialchars($fullName) . '</a>';
                 break;
             case 1:
-                $mainMenu = '<a href="../Roles/Intern.php" style="color: lightgreen;">' . htmlspecialchars($fullName) . '</a>';
+                $mainMenu = '<a href="../Roles/Reporter.php" style="color: lightgreen;">' . htmlspecialchars($fullName) . '</a>';
                 break;
             default:
                 break;

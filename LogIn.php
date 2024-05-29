@@ -163,7 +163,7 @@
                                         break;
                                     case 4:
                                         $_SESSION['$employee_role'] = "Director";
-                                        header('Location: Roles/Director.php');
+                                        header('Location: Pages/Document.php');     // Yup, that's all they can do.
                                         break;
                                     case 3:
                                         $_SESSION['$employee_role'] = "Manager";
@@ -174,8 +174,8 @@
                                         header('Location: Roles/Staff.php');
                                         break;
                                     case 1:
-                                        $_SESSION['$employee_role'] = "Intern";
-                                        header('Location: Roles/Intern.php');
+                                        $_SESSION['$employee_role'] = "Reporter";
+                                        header('Location: Roles/Reporter.php');
                                         break;
                                     default:
                                         // Handle unexpected role values if necessary

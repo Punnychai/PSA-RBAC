@@ -49,7 +49,7 @@
                             JOIN documents d ON e.role_id = 2 AND d.confidentiality <= 2
                             WHERE e.role_id = 2 AND e.department_id != d.department_id AND e.employee_id =" . $_SESSION['employee_id'];
                             break;
-                        case 'Intern':
+                        case 'Reporter':
                             $condition = " WHERE d.confidentiality = 1";
                             break;
                     }
