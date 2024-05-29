@@ -16,19 +16,9 @@
         <link rel="stylesheet" href="Pages.css" />
     </head>
     <body>
-        <div style="background-color: #3F3F3F;
-            color: #fff;
-            margin: 30px 40px;
-            border-radius: 36px;
-            height: 85px;
-            font-size: 24px;
-            font-weight: 500;">
-
-            <?php
-                $username = $_SESSION['username'];
-                echo "<h2 style='position: absolute; top: 22px; left: 100px;'> " . "<span style='color: lightgreen'>$username</span>" . " is on Documents Page</h2><br>";
-            ?>
-        </div>
+        <?php   $pageName = "Documents";
+                include '../Pages/HeadBar.php'; ?>
+        <div style="height: 100px;"></div> <!-- break -->
         <div class="book-panel">
             <table>
                 <tr class="no-hover">

@@ -14,6 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Staff</title>
         <link rel="stylesheet" href="Roles.css" />
+        <link rel="stylesheet" href="../Pages/Pages.css" />
     </head>
     <body>
         <?php include '../Pages/HeadBar.php'; ?>

@@ -3,7 +3,7 @@
     session_start();
 
     // Use a prepared statement to prevent SQL injection
-    $getName = "SELECT fullname FROM employees WHERE username = ? LIMIT 1";
+    $getName = "SELECT fullname, role_id FROM employees WHERE username = ? LIMIT 1";
     $stmt = $mysqli->prepare($getName);
 
     if ($stmt) {
@@ -12,25 +12,38 @@
 
         // Execute the query & Bind the result to variables
         $stmt->execute();
-        $stmt->bind_result($fullName);
+        $stmt->bind_result($fullName, $role);
 
         // Fetch the result
         $stmt->fetch();
+
+        switch ($role) {
+            case 5:
+                $mainMenu = '<a href="../Roles/Admin.php" style="color: lightgreen;">' . htmlspecialchars($fullName) . '</a>';
+                break;
+            case 4:
+                $mainMenu = '<a href="../Roles/Director.php" style="color: lightgreen;">' . htmlspecialchars($fullName) . '</a>';
+                break;
+            case 3:
+                $mainMenu = '<a href="../Roles/Manager.php" style="color: lightgreen;">' . htmlspecialchars($fullName) . '</a>';
+                break;
+            case 2:
+                $mainMenu = '<a href="../Roles/Staff.php" style="color: lightgreen;">' . htmlspecialchars($fullName) . '</a>';
+                break;
+            case 1:
+                $mainMenu = '<a href="../Roles/Intern.php" style="color: lightgreen;">' . htmlspecialchars($fullName) . '</a>';
+                break;
+            default:
+                break;
+        }
+        
         echo '
             <nav>
             <ul>
                 <li><img src="../Images/ElGato.jpg" alt="Logo" id="logo"></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle">News ▼</a>
-                    <div class="dropdown-content">
-                        <a href="#">International Situations</a>
-                        <a href="#">Public Announcements</a>
-                        <a href="#">Organisational Events</a>
-                    </div>
-                </li>
-                <li><a href="../Pages/Document.php">Documents</a></li> <!-- use RBAC to navigate -->
-                <li style="position: fixed; right: 185px; color: lightgreen;">' . $fullName . '</li>
-                <li style="position: fixed; right: 63px;"><a href="../Pages/About.php">About</a></li>
+                <li>' . $pageName . '</li>
+                <li style="position: fixed; right: 185px;">' . $mainMenu . '</li>
+                <li style="position: fixed; right: 63px;"><a href="../Home.php">Home</a></li>
             </ul>
         </nav>';
         

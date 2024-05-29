@@ -12,22 +12,22 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-        <link rel="stylesheet" href="Manage.css" />
+        <title>Document Management</title>
+        <link rel="stylesheet" href="../Pages/Pages.css" />
+        <style>
+            .book-panel {
+                width: 90%;
+                margin-left: 100px;
+            }
+            tr th, tr td {
+                width:25%;
+            }
+        </style>
     </head>
     <body>
-        <div style="background-color: #3F3F3F;
-            color: #fff;
-            margin: 30px 40px;
-            border-radius: 36px;
-            height: 85px;
-            font-size: 24px;
-            font-weight: 500;">
-
-            <?php
-                $username = $_SESSION['username'];
-                echo "<h2 style='position: absolute; top: 22px; left: 100px;'> " . "<span style='color: lightgreen'>$username</span>" . " is on Documents Management Page</h2><br>";
-            ?>
+        <?php   $pageName = "Document Management";
+                include '../Pages/HeadBar.php'; ?>
+        <div style="height: 100px;"></div> <!-- break -->
         </div>
         <div class="book-panel">
             <table> 
