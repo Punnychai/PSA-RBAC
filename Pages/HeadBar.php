@@ -1,43 +1,77 @@
-<div style="background-color: #3F3F3F;
-        color: #fff;
-        margin: 30px 40px;
-        border-radius: 36px;
-        height: 85px;
-        font-size: 24px;
-        font-weight: 500;">
+<?php
+    include '../connect.php';
+    session_start();
 
-    <?php
-        include '../connect.php';
-        session_start();
+    // Use a prepared statement to prevent SQL injection
+    $getName = "SELECT fullname FROM employees WHERE username = ? LIMIT 1";
+    $stmt = $mysqli->prepare($getName);
 
-        // Use a prepared statement to prevent SQL injection
-        $getName = "SELECT fullname FROM employees WHERE username = ? LIMIT 1";
-        $stmt = $mysqli->prepare($getName);
+    if ($stmt) {
+        // Bind the session username as a parameter
+        $stmt->bind_param("s", $_SESSION['username']);
 
-        if ($stmt) {
-            // Bind the session username as a parameter
-            $stmt->bind_param("s", $_SESSION['username']);
+        // Execute the query & Bind the result to variables
+        $stmt->execute();
+        $stmt->bind_result($fullName);
 
-            // Execute the query & Bind the result to variables
-            $stmt->execute();
-            $stmt->bind_result($fullName);
+        // Fetch the result
+        $stmt->fetch();
+        echo '
+            <nav>
+            <ul>
+                <li><img src="../Images/ElGato.jpg" alt="Logo" id="logo"></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">News ▼</a>
+                    <div class="dropdown-content">
+                        <a href="#">International Situations</a>
+                        <a href="#">Public Announcements</a>
+                        <a href="#">Organisational Events</a>
+                    </div>
+                </li>
+                <li><a href="../Pages/Document.php">Documents</a></li> <!-- use RBAC to navigate -->
+                <li style="position: fixed; right: 185px; color: lightgreen;">' . $fullName . '</li>
+                <li style="position: fixed; right: 63px;"><a href="../Pages/About.php">About</a></li>
+            </ul>
+        </nav>';
+        
+        
+        $stmt->close();
+    } else {
+        // If the query fails, echo a default welcome message
+        echo "<h2 style='position: absolute; top: 22px; left: 100px;'>Welcome!</h2>";
+    }
+?>
 
-            // Fetch the result
-            $stmt->fetch();
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var dropdowns = document.querySelectorAll('.dropdown');
 
-            if ($username) {
-                // If the user's name is retrieved, display the welcome message
-                echo "<h2 style='position: absolute; top: 22px; left: 100px;'>Welcome, " . "<span style='color: lightgreen'>$fullName</span>" . "!</h2><br>";
+        dropdowns.forEach(function(dropdown) {
+            var toggle = dropdown.querySelector('.dropdown-toggle');
+            var content = dropdown.querySelector('.dropdown-content');
 
-            } else {
-                // If the query returns an empty result set, display a default welcome message
-                echo "<p>Welcome!</p><br>";
+            toggle.addEventListener('click', function(event) {
+                event.preventDefault();
+                // Hide other open dropdowns
+                document.querySelectorAll('.dropdown-content').forEach(function(item) {
+                    if (item !== content) item.style.display = 'none';
+                });
+                // Toggle the clicked dropdown
+                content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+
+        // Close dropdown if clicked outside
+        document.addEventListener('click', function(event) {
+            var isClickInside = Array.from(dropdowns).some(function(dropdown) {
+                return dropdown.contains(event.target);
+            });
+
+            if (!isClickInside) {
+                document.querySelectorAll('.dropdown-content').forEach(function(content) {
+                    content.style.display = 'none';
+                });
             }
-            
-            $stmt->close();
-        } else {
-            // If the query fails, echo a default welcome message
-            echo "<h2 style='position: absolute; top: 22px; left: 100px;'>Welcome!</h2>";
-        }
-    ?>
-</div>
+        });
+    });
+</script>

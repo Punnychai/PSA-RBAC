@@ -4,12 +4,12 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Home</title>
-        <link rel="stylesheet" href="Pages.css" />
+        <link rel="stylesheet" href="./Pages/Pages.css" />
     </head>
     <body>
         <nav>
             <ul>
-                <li style="margin-left: 100px;"><a href="Home.php">Home</a></li>
+                <li><img src="./Images/ElGato.jpg" alt="Logo" id="logo"></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle">News ▼</a>
                     <div class="dropdown-content">
@@ -18,9 +18,9 @@
                         <a href="#">Organisational Events</a>
                     </div>
                 </li>
-                <li><a href="Document.php">Documents</a></li> <!-- use RBAC to navigate -->
-                <li style="margin-left: 1000px;"><a href="../LogIn.php">Log In</a></li>
-                <li><a href="About.php">About</a></li>
+                <li><a href="./Pages/Document.php">Documents</a></li> <!-- use RBAC to navigate -->
+                <li style="margin-left: 1150px;"><a href="LogIn.php">Log In</a></li>
+                <li><a href="./Pages/About.php">About</a></li>
             </ul>
         </nav>
 
@@ -57,9 +57,8 @@
                 });
             });
         </script>
-        <img src="../Images/ElGato.jpg" alt="Logo" style="width: 70px; height: 70px; border-radius: 50%; position: absolute; top: 37px; left:50px;">
     
-        <div>
+        <div></div>
             <!-- related contents -->
         </div>
 
