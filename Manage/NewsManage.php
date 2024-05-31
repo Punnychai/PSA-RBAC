@@ -14,6 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>News Management</title>
         <link rel="stylesheet" href="../Pages/Pages.css" />
+        <link rel="stylesheet" href="Manage.css" />
         <style>
             .book-panel {
                 width: 90%;
@@ -86,5 +87,8 @@
                 ?>
             </table>
         </div>
+        <a href="NewsAdd.php" class="add-button">
+            <label>Add New News</label>
+        </a>    
     </body>
 </html>

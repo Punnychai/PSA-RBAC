@@ -14,26 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document Management</title>
         <link rel="stylesheet" href="../Pages/Pages.css" />
-        <style>
-            .book-panel {
-                width: 90%;
-                margin-left: 100px;
-            }
-            td {
-                font-size: 20px;
-                font-weight: 400px;
-                margin: 0;
-                padding: 0;
-            }
-            td a {
-                font-family: 'Inter';
-                text-decoration: none;
-                font-weight: 600;
-            }
-            tr th, tr td {
-                width:25%;
-            }
-        </style>
+        <link rel="stylesheet" href="Manage.css" />
     </head>
     <body>
         <?php   $pageName = "Document Management";
@@ -107,5 +88,8 @@
                 ?>
             </table>
         </div>
+        <a href="DocsAdd.php" class="add-button">
+            <label>Add New Document</label>
+        </a>
     </body>
 </html>

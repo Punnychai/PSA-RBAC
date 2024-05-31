@@ -1,42 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700&display=swap');
 
 body {
-    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+}
+.book-panel {
+    width: 90%;
+    margin-left: 100px;
+}
+td {
+    font-size: 20px;
+    font-weight: 400px;
     margin: 0;
     padding: 0;
 }
-
-.book-panel {
-    margin: 40px;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-th {
-    height: 60px;
-    font-size: 32px;
+td a {
+    font-family: 'Inter';
+    text-decoration: none;
     font-weight: 600;
 }
-tr {
-    height: 60px;
-    text-align: center;
-}
 tr th, tr td {
-    width: 25%;
+    width:25%;
 }
 
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-tr:hover {
-    background-color: lightblue;
+.add-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #28a745;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    margin: 20px;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-size: 26px;
+    font-weight: 600;
+    transition: background-color 0.3s ease; /* Smooth transition */
+    position: absolute;
+    right: 70px;
+    bottom: 20px;
 }
 
-.no-hover:hover {
-    background-color: white;
+.add-button:hover {
+    background-color: #216838;
+}
+
+.add-button label {
+    margin: 0;
+    line-height: 1.2;
 }
