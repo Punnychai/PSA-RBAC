@@ -17,6 +17,10 @@
         // Fetch the result
         $stmt->fetch();
 
+        if ($pageName == "News") {
+            $fullName = " ";        // News page doesn't require Log In
+        }
+
         switch ($role) {
             case 5:
                 $mainMenu = '<a href="../Roles/Admin.php" style="color: lightgreen;">' . htmlspecialchars($fullName) . '</a>';

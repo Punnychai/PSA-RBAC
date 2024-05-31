@@ -13,10 +13,12 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle">News ▼</a>
                     <div class="dropdown-content">
-                        <a href="#">International Situations</a>
-                        <a href="#">Public Announcements</a>
-                        <a href="#">Organisational Events</a>
+                        <a href="Pages/News.php?condition='int'">International Situations</a>
+                        <a href="Pages/News.php?condition='pub'">Public Announcements</a>
+                        <a href="Pages/News.php?condition='org'">Organisational Events</a>
+                        <a href="Pages/News.php?condition=('int' OR 'pub' OR 'org')">View All</a>
                     </div>
+
                 </li>
                 <li><a href="./Pages/Document.php">Documents</a></li> <!-- use RBAC to navigate -->
                 <li style="margin-left: 1150px;"><a href="LogIn.php">Log In</a></li>
