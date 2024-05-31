@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    if ($_SESSION['$employee_role'] != 'Admin' && $_SESSION['$employee_role'] != 'Manager') {
+    if ($_SESSION['$employee_role'] != 'Admin' && $_SESSION['$employee_role'] != 'Reporter') {
         header('Location: ../LogIn.php');
         exit();
     }
