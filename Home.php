@@ -21,8 +21,15 @@
 
                 </li>
                 <li><a href="./Pages/Document.php">Documents</a></li> <!-- use RBAC to navigate -->
-                <li style="margin-left: 1150px;"><a href="LogIn.php">Log In</a></li>
-                <li><a href="./Pages/About.php">About</a></li>
+                <?php
+                    session_start();
+                    if (isset($_SESSION['$employee_role'])) {   // if user is signed in
+                        echo '<li style="margin-left: 1150px;"><a href="LogOut.php" style="color: #E3242B">Log Out</a></li>';
+                    } else {
+                        echo '<li style="margin-left: 1150px;"><a href="LogIn.php">Log In</a></li>';
+                    }
+                ?>
+                <li style="position: absolute; right: 35px; top: 10px;"><a href="./Pages/About.php">About</a></li>
             </ul>
         </nav>
 

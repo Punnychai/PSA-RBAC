@@ -41,8 +41,7 @@
                 font-weight: 500;
                 margin: 4px 0 10px 0;
             }
-
-            
+  
             #username, #password {
                 height: 17px;
                 padding: 10px;
@@ -100,6 +99,11 @@
             .login-container p {
                 margin-top: 10px;
                 font-size: 14px;
+            }
+
+            .pwd-error {
+                text-align: center;
+                font-size: 24px;
             }
         </style>
     </head>
@@ -163,7 +167,7 @@
                                         break;
                                     case 4:
                                         $_SESSION['$employee_role'] = "Director";
-                                        header('Location: Pages/Document.php');     // Yup, that's all they can do.
+                                        header('Location: Roles/Director.php');
                                         break;
                                     case 3:
                                         $_SESSION['$employee_role'] = "Manager";
@@ -178,11 +182,15 @@
                                         header('Location: Roles/Reporter.php');
                                         break;
                                     default:
-                                        // Handle unexpected role values if necessary
+                                        // unexpected roles
                                         break;
                                 }
                             }
+                        } else {
+                            echo '<h3 class="pwd-error">Incorrect Username or Password</h3>';
                         }
+                    } else {
+                        echo '<h3 class="pwd-error">Incorrect Username or Password</h3>';
                     }
                 }
             }
