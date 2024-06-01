@@ -19,7 +19,7 @@
     <body>
         <?php include '../Pages/HeadBar.php'; ?>
         <div class="main">
-            <a href="../Pages/News.php" class="manage">
+            <a href="../Pages/News.php?condition=('int' OR 'pub' OR 'org')" class="manage">
                 <br /><label>News</label>
             </a>
             <a href="../Pages/Document.php" class="manage">

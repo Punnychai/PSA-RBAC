@@ -1,4 +1,4 @@
-<?php
+<?php           // currently unused
     session_start();
 
     if ($_SESSION['$employee_role'] != "Director") {
@@ -18,14 +18,14 @@
     </head>
     <body>
         <?php include '../Pages/HeadBar.php'; ?>
-        <div class="main">
-            <a href="../Pages/News.php" class="manage">
+        <div class="main">  
+            <a href="../Pages/News.php?condition=('int' OR 'pub' OR 'org')" class="manage">
                 <br /><label>News</label>
             </a>
             <a href="../Pages/Document.php" class="manage">
                 <br /><label>Documents</label>
             </a>
-            <a href="../Manage/DocsManage.php" class="manage">
+            <a href="../manage/DocsAdd.php" class="manage"> <!-- CREATE only, NO R U D -->
                 <label>Documents Management</label>
             </a>
         </div>

@@ -19,11 +19,11 @@
     <body>
         <?php include '../Pages/HeadBar.php'; ?>
         <div class="main">
-            <a href="../Pages/Document.php" class="manage">
-                <br /><label>Documents</label>
-            </a>
             <a href="../Manage/NewsManage.php" class="manage">
                 <label>News Management</label>
+            </a>
+            <a href="../Pages/Document.php" class="manage">
+                <br /><label>Documents</label>
             </a>
         </div>
     </body>
