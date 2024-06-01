@@ -5,6 +5,9 @@
         header('Location: ../LogIn.php');      // this page can only be viewed by Admin and Manager
         exit();
     }
+    else {
+        $department = $_SESSION['$department'];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -38,21 +41,11 @@
                     
                     switch ($_SESSION['$employee_role']) {
                         case 'Admin':
-                        case 'Director':
                             $condition = " ";
                             break;
-                        case 'Manager':
-                            $condition = "WHERE d.confidentiality < 5";
+                        case 'Manager':     // can only edit documents in their department
+                            $condition = "WHERE d.confidentiality < 5 AND d.department_id = '" . $department . "'";
                             break;
-                        case 'Staff':
-                            $condition = "JOIN employees e ON e.department_id = d.department_id AND e.role_id = 2 AND d.confidentiality <= 3
-                            WHERE e.role_id = 2 AND e.employee_id = " . $_SESSION['employee_id'] .
-                            " UNION
-                            SELECT d.document_id, d.document_name, d.department_id, d.confidentiality FROM employees e
-                            JOIN documents d ON e.role_id = 2 AND d.confidentiality <= 2
-                            WHERE e.role_id = 2 AND e.department_id != d.department_id AND e.employee_id =" . $_SESSION['employee_id'];
-                            break;
-                        case 'Reporter':
                         default:    // unset & unexpected roles
                             $condition = " WHERE d.confidentiality = 1";
                             break;

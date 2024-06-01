@@ -3,7 +3,7 @@
     session_start();
 
     // Use a prepared statement to prevent SQL injection
-    $getName = "SELECT fullname, role_id FROM employees WHERE username = ? LIMIT 1";
+    $getName = "SELECT fullname, department_id, role_id FROM employees WHERE username = ? LIMIT 1";
     $stmt = $mysqli->prepare($getName);
 
     if ($stmt) {
@@ -12,14 +12,12 @@
 
         // Execute the query & Bind the result to variables
         $stmt->execute();
-        $stmt->bind_result($fullName, $role);
+        $stmt->bind_result($fullName, $department, $role);
+
+        $_SESSION['$department'] = $department;
 
         // Fetch the result
         $stmt->fetch();
-
-        if ($pageName == "News") {
-            $fullName = " ";        // News page doesn't require Log In
-        }
 
         switch ($role) {
             case 5:
