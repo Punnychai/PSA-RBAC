@@ -50,6 +50,7 @@
                             WHERE e.role_id = 2 AND e.department_id != d.department_id AND e.employee_id =" . $_SESSION['employee_id'];
                             break;
                         case 'Reporter':
+                        default:    // unset & unexpected roles
                             $condition = " WHERE d.confidentiality = 1";
                             break;
                     }

@@ -181,8 +181,9 @@
                                         $_SESSION['$employee_role'] = "Reporter";
                                         header('Location: Roles/Reporter.php');
                                         break;
-                                    default:
-                                        // unexpected roles
+                                    default:       // unset & unexpected roles
+                                        $_SESSION['$employee_role'] = "Guest";
+                                        header('Location: Home.php');
                                         break;
                                 }
                             }
