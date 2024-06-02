@@ -4,8 +4,7 @@
     if ($_SESSION['$employee_role'] != 'Admin' && $_SESSION['$employee_role'] != 'Manager') {
         header('Location: ../LogIn.php');      // this page can only be viewed by Admin and Manager
         exit();
-    }
-    else {
+    } else {
         $department = $_SESSION['$department'];
     }
 ?>

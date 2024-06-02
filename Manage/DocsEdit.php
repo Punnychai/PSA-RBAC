@@ -134,7 +134,13 @@
                 <label for="document_name"><h6>Document Name :</h6></label>
                 <input type="text" id="document_name" name="document_name" value="<?php echo htmlspecialchars($document_name); ?>" required><br>
                 <label for="confidentiality"><h6>Confidentiality :</h6></label>
-                <input type="text" id="confidentiality" name="confidentiality" value="<?php echo htmlspecialchars($confidentiality); ?>" required><br>
+                <select id="confidentiality" name="confidentiality" required style="height: 37px; width: 100%;">
+                    <option value=5>5</option>
+                    <option value=4>4</option>
+                    <option value=3>3</option>
+                    <option value=2>2</option>
+                    <option value=1>1</option>
+                </select><br>
 
                 <input type="submit" value="Update">
                 <br style="height: 100px;" />

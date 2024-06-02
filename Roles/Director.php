@@ -26,7 +26,7 @@
                 <br /><label>Documents</label>
             </a>
             <a href="../manage/DocsAdd.php" class="manage"> <!-- CREATE only, NO R U D -->
-                <label>Documents Management</label>
+                <label>Create Document</label>
             </a>
         </div>
     </body>
