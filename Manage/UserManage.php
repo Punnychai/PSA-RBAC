@@ -12,7 +12,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>User Management</title>
+        <title>Employee Management</title>
         <link rel="stylesheet" href="../Pages/Pages.css" />
         <style>
             .book-panel {
@@ -36,7 +36,7 @@
         </style>
     </head>
     <body>
-        <?php   $pageName = "User Management";
+        <?php   $pageName = "Employee Management";
                 include '../Pages/HeadBar.php'; ?>
         <div style="height: 100px;"></div> <!-- break -->
         </div>

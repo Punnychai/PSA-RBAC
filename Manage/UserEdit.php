@@ -127,7 +127,7 @@
         </style>
     </head>
     <body>
-        <?php   $pageName = "Employees Management";
+        <?php   $pageName = "Edit Employee";
                 include '../Pages/HeadBar.php'; ?>
         <div style="height: 200px;"></div> <!-- break -->
         <div class="login-container">

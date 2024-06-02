@@ -12,7 +12,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Manager</title>
+        <title>Employees</title>
         <link rel="stylesheet" href="Roles.css" />
         <link rel="stylesheet" href="../Pages/Pages.css" />
     </head>
@@ -24,6 +24,11 @@
             </a>
             <a href="../Pages/Document.php" class="manage">
                 <br /><label>Documents</label>
+            </a>
+        </div>
+        <div class="main" style="margin-top: -300px;">
+            <a href="../Pages/Employees.php" class="manage">
+                <label>View<br />Employees</label>
             </a>
             <a href="../Manage/DocsManage.php" class="manage">
                 <label>Documents Management</label>
