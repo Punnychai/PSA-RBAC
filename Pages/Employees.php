@@ -1,9 +1,11 @@
 <?php
     session_start();
 
-    if ($_SESSION['$employee_role'] != 'Admin') {
-        header('Location: ../LogIn.php');
+    if ($_SESSION['$employee_role'] != "Manager") {
+        header('Location: ../LogIn.php');       // this page can only be viewed by manager
         exit();
+    } else {
+        $department = $_SESSION['$department'];
     }
 ?>
 
@@ -12,8 +14,8 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Employee Management</title>
-        <link rel="stylesheet" href="../Pages/Pages.css" />
+        <title>Employees</title>
+        <link rel="stylesheet" href="Pages.css" />
         <style>
             .book-panel {
                 width: 90%;
@@ -31,24 +33,22 @@
                 font-weight: 600;
             }
             tr th, tr td {
-                width:16.6%;
+                width:20%;
             }
         </style>
     </head>
     <body>
-        <?php   $pageName = "Employee Management";
+        <?php   $pageName = "Employees";
                 include '../Pages/HeadBar.php'; ?>
         <div style="height: 100px;"></div> <!-- break -->
-        </div>
         <div class="book-panel">
-            <table> 
+            <table>
                 <tr class="no-hover">
                     <th>Employee ID</th> 
                     <th>Full Name</th>
                     <th>Username</th>
                     <th>Department</th>
                     <th>Role</th>
-                    <th>Manage</th>
                 </tr>
             </table>
         </div>
@@ -58,7 +58,7 @@
                     include '../connect.php';
                     
                     $empList = "SELECT e.employee_id, e.email, e.fullname, e.username, e.department_id, r.role_name FROM employees e
-                             LEFT JOIN roles r ON e.role_id = r.role_id";
+                             LEFT JOIN roles r ON e.role_id = r.role_id WHERE e.department_id = '" . $department . "'";
 
                     $result = $mysqli->query($empList);
 
@@ -73,14 +73,6 @@
                             echo "<td>" . htmlspecialchars($row["username"]) . "</td>";
                             echo "<td>" . htmlspecialchars($row["department_id"]) . "</td>";
                             echo "<td>" . htmlspecialchars($row["role_name"]) . "</td>";
-                            echo "<td>
-                                    <a href='UserEdit.php?uID=$uID' style='color: #028A0F;'>
-                                        <p>Edit</p>
-                                    </a>
-                                    <a href='UserRemove.php?uID=$uID' style='color: #D71609;'>
-                                        <p>Remove</p>
-                                    </a>
-                                </td>";
                             echo "</tr>";
                         }
 
