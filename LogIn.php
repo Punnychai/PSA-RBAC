@@ -151,8 +151,41 @@
                         // password true
                             $_SESSION['employee_id'] = $employee_id;
                             $_SESSION['username'] = $db_usn;
-                            $query = "SELECT role_id FROM employees WHERE employee_id = ?";
 
+                            // IP Logging
+                            $log_query = "INSERT INTO iplog (employee_id, ip_address, timestamp) VALUES (?, ?, ?)";
+                            $log_stmt = $mysqli->prepare($log_query);
+
+                            function get_client_ip() {
+                                $ip_address = '';
+                            
+                                if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+                                    // Shared Internet
+                                    $ip_address = $_SERVER['HTTP_CLIENT_IP'];
+                                } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                                    // Proxy-Passed
+                                    $ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
+                                } else {
+                                    // Remote Address
+                                    $ip_address = $_SERVER['REMOTE_ADDR'];
+                                }
+
+                                // IPv6 LocalHost handler
+                                if ($ip_address == '::1') {
+                                    $ip_address = '127.0.0.1';
+                                }
+                            
+                                return $ip_address;
+                            }
+                            
+                            $ip_address = get_client_ip();
+                            $timestamp = date('Y-m-d H:i:s');
+
+                            $log_stmt->bind_param("iss", $_SESSION['employee_id'], $ip_address, $timestamp);
+                            $log_stmt->execute();
+
+                            // LogIn Function
+                            $query = "SELECT role_id FROM employees WHERE employee_id = ?";
                             $stmt = $mysqli->prepare($query);
                             $stmt->bind_param("i", $employee_id);
                             $stmt->execute();

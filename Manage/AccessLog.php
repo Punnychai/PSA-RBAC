@@ -44,9 +44,9 @@
                 <tr class="no-hover">
                     <th>Log ID</th> 
                     <th>Employee ID</th>
+                    <th>Username</th>
                     <th>IP Address</th>
                     <th>Timestamp</th>
-                    <th>Files Accessed</th>
                 </tr>
             </table>
         </div>
@@ -55,7 +55,8 @@
                 <?php
                     include '../connect.php';
                     
-                    $logQuery = "SELECT log_id, employee_id, ip_address, timestamp, document_id FROM iplog";
+                    $logQuery = "SELECT i.log_id, i.employee_id, i.ip_address, i.timestamp, e.username FROM iplog i
+                                 INNER JOIN employees e on i.employee_id = e.employee_id";
 
                     $result = $mysqli->query($logQuery);
 
@@ -67,9 +68,9 @@
                             echo "<tr>";
                             echo "<td>" . htmlspecialchars($row["log_id"]) . "</td>";
                             echo "<td>" . htmlspecialchars($row["employee_id"]) . "</td>";
+                            echo "<td>" . htmlspecialchars($row["username"]) . "</td>";
                             echo "<td>" . htmlspecialchars($row["ip_address"]) . "</td>";
                             echo "<td>" . htmlspecialchars($row["timestamp"]) . "</td>";
-                            echo "<td>" . htmlspecialchars($row["document_id"]) . "</td>";
                             echo "</tr>";
                         }
 
