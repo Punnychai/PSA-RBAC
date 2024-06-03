@@ -135,7 +135,11 @@
                 <input type="text" id="document_name" name="document_name" value="<?php echo htmlspecialchars($document_name); ?>" required><br>
                 <label for="confidentiality"><h6>Confidentiality :</h6></label>
                 <select id="confidentiality" name="confidentiality" required style="height: 37px; width: 100%;">
-                    <option value=5>5</option>
+                    <?php
+                        if ($_SESSION['$employee_role'] == 'Admin') {       // Manager cannot see this
+                            echo '<option value=5>5</option>';
+                        }
+                    ?>
                     <option value=4>4</option>
                     <option value=3>3</option>
                     <option value=2>2</option>

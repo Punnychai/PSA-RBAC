@@ -14,11 +14,7 @@
         $doc_name = htmlspecialchars($_POST['document_name']);
         $dept_id = htmlspecialchars($_POST['department_id']);
         $conf_val = htmlspecialchars($_POST['confidentiality']);
-
-        if ($_SESSION['$employee_role'] == 'Manager') {      // Manager can only create new documents in their own department (conf <= 4)
-            // doesn't work yet; Whatever
-        }
-    
+        
         $stmt = $mysqli->prepare("INSERT INTO documents (document_name, department_id, confidentiality) VALUES (?, ?, ?)");
         $stmt->bind_param('sss', $doc_name, $dept_id, $conf_val);
     
@@ -133,16 +129,44 @@
             <form method="post">
                 <label for="document_name"><h6>Document Name :</h6></label>
                 <input type="text" id="document_name" name="document_name" value="<?php echo htmlspecialchars($document_name); ?>" required><br>
-                <label for="department_id"><h6>Department :</h6></label>
-                <select id="department_id" name="department_id" required style="height: 37px; width: 100%;">
-                    <option value="CSC" <?php if($department_id == 'CSC') echo 'selected'; ?>>CyberSecurity</option>
-                    <option value="ICT" <?php if($department_id == 'ICT') echo 'selected'; ?>>Information and Communications Technology</option>
-                    <option value="NIS" <?php if($department_id == 'NIS') echo 'selected'; ?>>Network Infrastructure</option>
-                    <option value="RND" <?php if($department_id == 'RND') echo 'selected'; ?>>Research and Development</option>
-                </select><br>
+                
+            
+
+                <?php
+                    if  ($_SESSION['$employee_role'] == 'Manager') {     // Manager can't select document's department
+                        echo '<label for="department_id"><h6>Department :</h6></label>';
+                        echo '<select id="department_id" name="department_id" style="height: 37px; width: 100%;">';
+                        switch ($department)  {
+                            case 'CSC':
+                                $fullDept = "CyberSecurity";
+                            case 'ICT';
+                                $fullDept = "Information and Communications Technology";
+                            case 'NIS':
+                                $fullDept = "Network Infrastructure";
+                            case 'RND';
+                                $fullDept = "Research and Development";
+                        }
+                        echo '<option value="' . $department . '">' . $fullDept . '</option></select><br>';
+                    }
+                    else {      // Admin $ Director
+                        echo '<label for="department_id"><h6>Department :</h6></label>';
+                        echo '<select id="department_id" name="department_id" style="height: 37px; width: 100%;">
+                                <option value="CSC" ' . ($department_id == 'CSC' ? 'selected' : '') . '>CyberSecurity</option>
+                                <option value="ICT" ' . ($department_id == 'ICT' ? 'selected' : '') . '>Information and Communications Technology</option>
+                                <option value="NIS" ' . ($department_id == 'NIS' ? 'selected' : '') . '>Network Infrastructure</option>
+                                <option value="RND" ' . ($department_id == 'RND' ? 'selected' : '') . '>Research and Development</option>
+                              </select><br>';
+                    }
+                ?>
+
+
                 <label for="confidentiality"><h6>Confidentiality :</h6></label>
                 <select id="confidentiality" name="confidentiality" required style="height: 37px; width: 100%;">
-                    <option value=5>5</option>
+                    <?php
+                        if ($_SESSION['$employee_role'] != 'Manager') {       // Manager cannot see this
+                            echo '<option value=5>5</option>';
+                        }
+                    ?>
                     <option value=4>4</option>
                     <option value=3>3</option>
                     <option value=2>2</option>
@@ -151,7 +175,14 @@
 
                 <input type="submit" value="Add Document">
                 <br style="height: 100px;" />
-                <a href="DocsManage.php" class="button cancel">Cancel</a>
+                <?php
+                    if ($_SESSION['$employee_role'] == 'Director') {        // redirect Director to allowed page
+                        echo '<a href="../Pages/Document.php" class="button cancel">Cancel</a>';
+                    }
+                    else {
+                        echo '<a href="DocsManage.php" class="button cancel">Cancel</a>';
+                    }
+                ?>
             </form>
         </div>
     </body>

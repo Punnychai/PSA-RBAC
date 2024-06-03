@@ -3,40 +3,23 @@ ROLES :
     4   Director
     3   Manager
     2   Staff
-    1   Intern
-
-
-DOCUMENTS :
-    5   VIEW : Admin, Director
-        EDIT   : Admin, Director
-
-    4   VIEW : Admin, Director, Manager
-        EDIT   : Admin, Director, Manager
-
-    3   VIEW : Admin, Director, Manager, Staff (same department as document)
-        EDIT   : Admin, Director, Manager (same department as document)
-
-    2   VIEW : Admin, Director, Manager, Staff
-        EDIT   : Admin, Director, Manager
-
-    1   VIEW : Admin, Director, Manager, Staff, Intern
-        EDIT   : Admin, Director, Manager
+    1   Reporter
 
 If someone try to access classified document without signing in, they'll be yeeted to login page
 
-NEWS : publicly available; only managed by Admin & Director
+NEWS : publicly available; only managed by Admin & Reporter
 
 EMPLOYEES : only managed by Admin
 - employee_role are manually assigned by Admin, cuz it'd be chaos to let users do that by themselves
 
+PAGES
+- DocsManage : Edit, Remove
+- NewsManage : Add, Edit, Remove
+- UserManage : Edit, Remove (ไม่มี userAdd; let them create their own account)
+
 -----------------------------------------------
 
 TO-DO List
+
 - Include Time to crack password in SignUp page
 - Include access log (username, date, time, IP address)
-
-- DocsManage, DocsAdd
-- NewsView, NewsManage, NewsAdd
-- UserManage, UserAdd
-
-- Restyle the whole thing
