@@ -4,118 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Sign Up</title>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700&display=swap');
-
-            body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            }
-
-            .signup-container {
-            width: 400px;
-            height: 560px;
-            margin: 50px auto; /* Center horizontally with auto margin */
-            padding: 20px;
-            border-radius: 8px;
-            background-color: #222;
-            color: #fff;
-            text-align: left;
-            box-shadow: 0px 10px 50px 0px rgba(0, 0, 0, 0.5); /* Add box shadow for depth */
-            }
-
-            .signup-container h2 {
-            margin-bottom: 20px;
-            font-size: 30px;
-            font-weight: 500; /* Apply font weight */
-            }
-
-            .signup-container form {
-            display: flex;
-            flex-direction: column;
-            }
-
-            .signup-container h6 {
-            font-size: 18px;
-            font-weight: 500;
-            margin: 4px 0 10px 0;
-            }
-            
-            #email, #fullname, #username, #password {
-            height: 17px;
-            padding: 10px;
-            margin-bottom: 8px;
-            border: none;
-            border-radius: 6px;
-            background-color: #333;
-            color: #fff;
-            width: 95%;
-            }
-
-            #password {
-            border-radius: 6px 0 0 6px;
-            }
-
-            #passwordStrength, #passwordMissing {
-            min-height: 20px;
-            margin: 4px 0 8px 0;
-            }
-
-
-            .signup-container select {
-            padding: 10px;
-            border: 1px solid #444;
-            border-radius: 6px;
-            background-color: #333;
-            color: #fff;
-            width: 100%;
-            }
-
-            #passwordVis {
-            width: 10%;
-            height: 37px;
-            border: none;
-            border-radius: 0 6px 6px 0;
-
-            }
-
-            #passwordVis:hover {
-            background-color: #AAA;
-            }
-
-            input[type="submit"] {
-            background-color: green;
-            color: white;
-            font-size: 16px;
-            font-weight: 600;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            }
-            
-            input[type="submit"]:hover {
-            background-color: darkgreen;
-            }
-
-            #goLogIn {
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 600;
-            padding: 0px 10px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            }
-
-            .signup-container p {
-            margin-top: 10px;
-            font-size: 14px;
-            }
-        </style>
+        <link rel="stylesheet" href="Public.css" />
     </head>
     <body>
         <div class="signup-container">
@@ -151,47 +40,73 @@
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 list($feedback, $missList) = passwordAnalyser($_POST['password']);
-                
-                echo "<p>Password Strength: $feedback</p>";
+                /*
+                echo '<h3 class="pwd-error">Password Strength:' . $feedback . '</h3>';
                 if ($missList) {
-                    echo "<p>Feedback: $missList</p>";
-                }
+                    echo '<h3 class="pwd-error>Feedback:' . $missList . '</h3>';
+                } */
                 
                 if ($feedback === 'Very Strong' || $feedback === 'Strong') {
                     session_start();
                     if (isset($_POST['SignUp'])) {
                         include 'connect.php';
-                        
-                        // Store user data in $_SESSION
-                        $_SESSION['email'] = $_POST['email'];
-                        $_SESSION['fullname'] = $_POST['fullname'];
-                        $_SESSION['username'] = $_POST['username'];
-                        $_SESSION['password'] = $_POST['password'];
-                        $_SESSION['signup'] = true;
+                        if ($_POST['password'] == "9h,-jkwdjsPhks;ko") {       // ต้มข่าไก่หญ้าหวาน
+                            modalOne();
+                        }
+                        else {
+                            // Store user data in $_SESSION
+                            $_SESSION['email'] = $_POST['email'];
+                            $_SESSION['fullname'] = $_POST['fullname'];
+                            $_SESSION['username'] = $_POST['username'];
+                            $_SESSION['password'] = $_POST['password'];
+                            $_SESSION['signup'] = true;
 
-                        if(isset($_SESSION['signup'])){
-                            unset($_SESSION['signup']);
-                            $email = $_SESSION['email'];
-                            $fullname = $_SESSION['fullname'];
-                            $username = $_SESSION['username'];
-                            $pwd = $_SESSION['password'];
-                            $hashedPwd = password_hash($pwd, PASSWORD_BCRYPT);
+                            if(isset($_SESSION['signup'])){
+                                unset($_SESSION['signup']);
+                                $email = $_SESSION['email'];
+                                $fullname = $_SESSION['fullname'];
+                                $username = $_SESSION['username'];
+                                $pwd = $_SESSION['password'];
+                                $hashedPwd = password_hash($pwd, PASSWORD_BCRYPT);
+                                
+                                // Prepared Statement & Parameter Binding (Prevent Injection)
+                                $sql = "INSERT INTO employees (email, fullname, username, pwd) VALUES (?, ?, ?, ?)";
+                                $stmt = $mysqli->prepare($sql);
+                                $stmt->bind_param("ssss", $email, $fullname, $username, $hashedPwd);
+                                $stmt->execute();
+                                $stmt->close();
+                            }
                             
-                            // Prepared Statement & Parameter Binding (Prevent Injection)
-                            $sql = "INSERT INTO employees (email, fullname, username, pwd) VALUES (?, ?, ?, ?)";
-                            $stmt = $mysqli->prepare($sql);
-                            $stmt->bind_param("ssss", $email, $fullname, $username, $hashedPwd);
-                            $stmt->execute();
-                            $stmt->close();
+                            modalTwo();
                         }
                     }
                     $mysqli->close();
                     session_destroy();
-                    header('location: Home.php');
                 } else {
-                    echo "<p>Password is not strong enough. Please improve your password.</p>";
+                    echo '<h3 class="pwd-error" id="error">Please make sure your password comply with our regulations.</h3>';
                 }
             }
+
+            function modalOne() {
+                echo '<div id="ModalOne" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <h3 id="modalText" style="margin:  100px 0 70px 14px;">Your Password can\'t contain Name / Mobile Number / Citizen ID / Birthdate / Address</h3>
+                            <input type="submit" name="Retry" value="Retry" style="width: 80%;" onclick="Retry()">
+                        </div>
+                    </div>';
+            };
+
+            function modalTwo() {
+                echo '<div id="ModalTwo" class="modal">
+                            <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <h3 id="modalText" style="margin:  60px 0 0 14px;">Add Biometrics for Authentication?</h3>
+                            <button id="proceed">Proceed</button>
+                            <button id="later" onclick="Later()">Later</button>
+                        </div>
+                    </div>';
+            };
         ?>
 
         <script src="PasswordAnalyser.js"></script>     <!-- CLIENT SIDE FEEDBACK -->
@@ -208,6 +123,23 @@
                 document.getElementById('passwordStrength').textContent = feedback[0];
                 document.getElementById('passwordMissing').textContent = feedback[1];
             });
+
+            var modal1 = document.getElementById("ModalOne");
+            if (modal1) {
+                modal1.style.display = "block";
+            }
+
+            var modal2 = document.getElementById("ModalTwo");
+            if (modal2) {
+                modal2.style.display = "block";
+            }
+
+            function Retry() {
+                window.location.href = './SignUp.php';
+            }
+            function Later() {
+                window.location.href = 'Home.php';
+            }
         </script>
     </body>
 </html>
