@@ -55,6 +55,8 @@
                             $log_query = "INSERT INTO iplog (employee_id, ip_address, timestamp) VALUES (?, ?, ?)";
                             $log_stmt = $mysqli->prepare($log_query);
 
+                            // modalOTP();
+
                             function get_client_ip() {
                                 $ip_address = '';
                             
@@ -127,13 +129,32 @@
                     }
                 }
             }
+
+            function modalOTP() {
+                echo '<div id="ModalOTP" class="modal">
+                            <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <br />
+                            <h3 id="modalText" style="margin: 20px 0 0 14px;">LogIn detected from New Location</h3>
+                            <h3 id="modalText" style="margin: 20px 0 0 14px;">Enter OTP to verify your identify </h3>
+                            <form method="POST" id="otpForm">
+                                <input type="text" name="otp" id="OTP" style="margin: 30px 0 10px 0;" required>
+                                <button type="submit" name="verify" id="verify" onclick="Verify()">Verify</button>
+                            </form>
+                        </div>
+                    </div>';
+            };
         ?>
 
         <script>
-            document.getElementById('password').addEventListener('input', function() {
-                const password = this.value;
-                document.getElementById('passwordStrength').textContent = "incorrect Username or Password";
-            });
+            var modalOTP = document.getElementById("ModalOTP");
+            if (modalOTP) {
+                modalOTP.style.display = "block";
+            }
+
+            function Verify() {
+                window.location.href = './SignUp.php';
+            }
         </script>
     </body>
 </html>
