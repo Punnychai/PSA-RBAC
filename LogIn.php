@@ -20,7 +20,6 @@
                     <p id="errorMessage"></p>
                 </div>
                 <input type="submit" name="LogIn" value="Log In">
-                <br />
                 <p style="text-align: center"> Doesn't have an account yet?</p>
                 <a id="goSignUp" href="SignUp.php">Create an Account</a>
             </form>
