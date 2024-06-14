@@ -25,13 +25,16 @@
                         <button type="button" id="passwordVis" onclick="togglePasswordVisibility()">S/H</button>
                     </div>
                 </div>
-                <div>
+                <div style="height: 90px;">
                     <p id="passwordStrength"></p>
                     <p id="passwordMissing"></p>
+                    <p id="password-strength"></p>
+                    <!-- <p id="password-patterns"></p> -->
                 </div>
+                
                 <input type="submit" name="SignUp" value="Sign Up">
                 <br />
-                <p style="text-align: center">Already a Member?<a id="goLogIn" href="LogIn.php">Log In</a></p>
+                <p style="text-align: center; position: relative; bottom: 20px;">Already a Member?<a id="goLogIn" href="LogIn.php">Log In</a></p>
             </form>
         </div>
         
@@ -140,6 +143,41 @@
             function Later() {
                 window.location.href = 'Home.php';
             }
+        </script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>   <!-- ZXCVBN Library -->
+        <script>
+            document.getElementById('password').addEventListener('input', function() {
+                var password = this.value;
+                var result = zxcvbn(password);
+
+                var timeToCrack = result.crack_times_display.offline_slow_hashing_1e4_per_second;
+                var feedback = `Estimated time to crack : ${timeToCrack}`;
+
+                document.getElementById('password-strength').innerText = feedback;
+
+                var patterns = result.sequence.slice(0, 2).map(function(pattern) {
+                    var details = `Pattern: ${pattern.pattern}, Token: '${pattern.token}'`;
+
+                    if (pattern.pattern === 'dictionary') {
+                        details += `, Dictionary: ${pattern.dictionary_name}, Rank: ${pattern.rank}`;
+                    } else if (pattern.pattern === 'spatial') {
+                        details += `, Graph: ${pattern.graph}, Turns: ${pattern.turns}, Shifts: ${pattern.shifted_count}`;
+                    } else if (pattern.pattern === 'repeat') {
+                        details += `, Base Token: ${pattern.base_token}, Repeat Count: ${pattern.repeat_count}`;
+                    } else if (pattern.pattern === 'sequence') {
+                        details += `, Sequence Name: ${pattern.sequence_name}, Sequence Size: ${pattern.sequence_size}`;
+                    } else if (pattern.pattern === 'regex') {
+                        details += `, Regex Name: ${pattern.regex_name}, Matched: ${pattern.matched}`;
+                    } else if (pattern.pattern === 'date') {
+                        details += `, Date: ${pattern.year}-${pattern.month}-${pattern.day}`;
+                    }
+
+                    return details;
+                }).join('<br>');
+
+                // document.getElementById('password-patterns').innerHTML = patterns || 'No patterns detected';
+            });
         </script>
     </body>
 </html>
