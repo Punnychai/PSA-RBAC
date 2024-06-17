@@ -79,6 +79,7 @@
                             }
                             
                             $ip_address = get_client_ip();
+                            date_default_timezone_set('Asia/Bangkok');  // set default timezone
                             $timestamp = date('Y-m-d H:i:s');
 
                             $log_stmt->bind_param("iss", $_SESSION['employee_id'], $ip_address, $timestamp);
